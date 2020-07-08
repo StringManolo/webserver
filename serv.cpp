@@ -64,10 +64,6 @@ int main(int argc, char **argv) {
       /* nada */
     }
 
-    /*
-    char buffer[8192];
-    auto bytesRead = read(connection, buffer, 8192);
-    */
 
     std::vector<char> buffer(2048); 
     auto bytesRead = read(connection, &buffer[0], buffer.size());

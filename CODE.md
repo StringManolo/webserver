@@ -18,11 +18,11 @@ Project presentation.
   
   
 ### **console.h**  
-Define a console.log(bool, string, type) method.  
+Define a _console.log(bool, string, type)_ method.  
 cout wrapper intended to split out messages in categories.  
-1st parameter manages output. (DEBUG and VERBOSE only)  
-2st parameter is the std::string to log.  
-3rd parameter is the type. (CRITICAL, WARNING, VERBOSE, DEBUG)  
+1st parameter manages output. (_DEBUG_ and _VERBOSE_ only)  
+2st parameter is the _std::string_ to log.  
+3rd parameter is the type. (_CRITICAL_, _WARNING_, _VERBOSE_, _DEBUG_)  
   
   
 ### **page.conf**  

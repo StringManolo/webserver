@@ -15,7 +15,7 @@
   
 &nbsp;  
   
-## **console.h**  
+## **[console.h](https://github.com/StringManolo/webserver/blob/master/console.h)**  
 ###### Exposed:  
   
    _console.log(bool, string, type)_  
@@ -49,14 +49,14 @@ int main() {
   
 &nbsp;  
   
-## **page.conf**  
+## **[page.conf](https://github.com/StringManolo/webserver/blob/master/page.conf)**  
   
 &nbsp;  
   
-## **read_config.c**  
+## **[read_config.c](https://github.com/StringManolo/webserver/blob/master/read_config.h)**  
   
 &nbsp;  
   
-## **serv.cpp**  
+## **[serv.cpp](https://github.com/StringManolo/webserver/blob/master/serv.cpp)**  
   
   

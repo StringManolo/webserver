@@ -1,10 +1,10 @@
 # FILES
 
-├── [README.md](https://github.com/StringManolo/webserver/blob/master/README.md)    
-├── [console.h](https://github.com/StringManolo/webserver/blob/master/console.h)  
-├── [page.conf](https://github.com/StringManolo/webserver/blob/master/page.conf)  
-├── [read_config.c](https://github.com/StringManolo/webserver/blob/master/read_config.c)  
-└── [serv.cpp](https://github.com/StringManolo/webserver/blob/master/serv.cpp)  
+├── [README.md](https://github.com/StringManolo/webserver/blob/master/FILES.md#readmemd)    
+├── [console.h](https://github.com/StringManolo/webserver/blob/master/FILES.md#consoleh)  
+├── [page.conf](https://github.com/StringManolo/webserver/blob/master/FILES.md#pageconf)  
+├── [read_config.c](https://github.com/StringManolo/webserver/blob/master/FILES.md#read_configc)  
+└── [serv.cpp](https://github.com/StringManolo/webserver/blob/master/FILES.md#servcpp)  
   
 0 directories, 5 files  
   

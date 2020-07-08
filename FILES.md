@@ -53,7 +53,7 @@ int main() {
   
 &nbsp;  
   
-## **[read_config.c](https://github.com/StringManolo/webserver/blob/master/read_config.h)**  
+## **[read_config.c](https://github.com/StringManolo/webserver/blob/master/read_config.c)**  
   
 &nbsp;  
   

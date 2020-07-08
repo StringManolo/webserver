@@ -5,6 +5,7 @@
 #include <iostream>
 #include <unistd.h>
 #include <vector>
+#include <map>
 
 /* console.log defined here */
 #include "console.h"

@@ -12,7 +12,7 @@
 &nbsp;  
   
 ## **README.md**  
-Project presentation.  
++ Project presentation.  
   
 &nbsp;  
   
@@ -27,7 +27,7 @@ Project presentation.
 * 2st parameter is the _std::string_ to log.  
 * 3rd parameter is the type. (_CRITICAL_, _WARNING_, _VERBOSE_, _DEBUG_)  
 ##### Example:
-* ```
+```
 #include "console.h"
 
 int main() {

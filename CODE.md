@@ -1,6 +1,6 @@
 # CODE
 
-├── (README.md)[https://github.com/StringManolo/webserver/blob/master/README.md]  
+├── [README.md](https://github.com/StringManolo/webserver/blob/master/README.md)    
 ├── console.h  
 ├── page.conf  
 ├── read_config.c  

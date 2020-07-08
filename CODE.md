@@ -17,11 +17,11 @@ Project presentation.
 &nbsp;  
   
 ## **console.h**  
-###### Exposed: 
-_console.log(bool, string, type)_ method.  
-###### Intended for:  
+##### Exposed: 
+_console.log(bool, string, type)_  
+##### Intended for:  
 cout wrapper intended to split out messages in categories.  
-###### Description:  
+##### Description:  
 1st parameter manages output. (_DEBUG_ and _VERBOSE_ only)  
 2st parameter is the _std::string_ to log.  
 3rd parameter is the type. (_CRITICAL_, _WARNING_, _VERBOSE_, _DEBUG_)  

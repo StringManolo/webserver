@@ -5,28 +5,32 @@
 #include <iostream>
 #include <unistd.h>
 
+/* console.log defined here */
+#include "console.h"
+CONSOLE console;
+
+
 #define HOST_PORT atoi(argv[2])
-struct in_addr ip;
 #define HOST_IP inet_aton(argv[1], &ip)
 #define ERROR -1
 
 int main(int argc, char **argv) {
 
+  struct in_addr ip;
+
   if (!argv[1]) {
-    std::cout << std::endl <<  "YOU FORGOT PARAMETERS:"  << 
-      std::endl << "Add ip and port." << std::endl <<
-      "Example: ./server 127.0.0.1 9090" << std::endl;
+    console.log(1, "YOU FORGOT PARAMETERS:\nAdd ip and port.\nExample: ./server 127.0.0.1 9090", CRITICAL);
+
     return 0;
   } else if (!argv[2]) {
-    std::cout << std::endl <<  "YOU FORGOT PARAMETERS:"  << 
-      std::endl << "Add ip and port." << std::endl <<
-      "Example: ./server 127.0.0.1 9090" << std::endl;
+    console.log(1, "YOU FORGOT PARAMETERS:\nAdd ip and port.\nExample: ./server 127.0.0.1 9090", CRITICAL);
+
     return 0;
   }
 
   int sockfd = socket(AF_INET, SOCK_STREAM, 0);
   if (sockfd == ERROR) {
-    std::cout << "Failed to create socket. Errno: " << errno << std::endl;
+    console.log(1, "Failed to create socket.", CRITICAL);
     return 1;
   }
 
@@ -38,35 +42,39 @@ int main(int argc, char **argv) {
 
   int sockbind = bind(sockfd, (struct sockaddr*)&sockaddr, sizeof(sockaddr));
   if (sockbind == ERROR) {
-    std::cout << "Failed to bind to port " << HOST_PORT
-        << ". Errno: " << errno << std::endl;
+    console.log(1, "Failed to bind to port", CRITICAL);
     return 2;
   }
 
   int socklist = listen(sockfd, 10);
   if (socklist == ERROR) {
-    std::cout << "Failed to listen on socket. Errno: " << errno << std::endl;
+    console.log(1, "Failed to listen on socket.", CRITICAL);
     return 3;
   }
+
+  console.log(1, "Server is listening", VERBOSE);
 
   for(;;) {
     auto addrlen = sizeof(sockaddr);
     int connection = accept(sockfd, (struct sockaddr*)&sockaddr, (socklen_t*)&addrlen);
 
     if (connection == ERROR) {
-      std::cout << "Failed to grab connection. Errno: " << errno << std::endl;
+      console.log(1, "Failed to grab connection.", DEBUG);
       /* nada */
     }
 
     char buffer[8192];
     auto bytesRead = read(connection, buffer, 8192);
-    std::cout << "Recived: " << buffer << std::endl;
+    console.log(1, "Connection recived", DEBUG);
+    console.log(1, buffer, DEBUG);
 
     
-    std::cout << "Connection closed." << std::endl;
+    console.log(1, "Connection closed.", DEBUG);
     close(connection); 
   }
 
 
   return 0;
 }
+
+

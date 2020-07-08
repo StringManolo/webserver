@@ -1,9 +1,14 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include "serv.h"
 
 #define CONFIG_VAR_LENGTH_CONST 12
+
+char *ltrim(char *str, const char *seps);
+char *rtrim(char *str, const char *seps);
+char *trim(char *str, const char *seps);
+int in_array(char **array, int size, char *lookfor );
+int index_of(char **array, int size, char *lookfor );
 
 int config_var_length = CONFIG_VAR_LENGTH_CONST;
 
@@ -137,11 +142,9 @@ int index_of(char **array, int size, char *lookfor )
     return -1;
 }
 
-/*
 
 int main()	{
 	read_config();
 	
 }
-*/
 

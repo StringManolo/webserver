@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <unistd.h>
+#include <vector>
 
 /* console.log defined here */
 #include "console.h"
@@ -63,10 +64,19 @@ int main(int argc, char **argv) {
       /* nada */
     }
 
+    /*
     char buffer[8192];
     auto bytesRead = read(connection, buffer, 8192);
+    */
+
+    std::vector<char> buffer(2048); 
+    auto bytesRead = read(connection, &buffer[0], buffer.size());
+    
+    std::string bufferOut (buffer.begin(), buffer.end());
+
+
     console.log(true, "Connection recived", DEBUG);
-    console.log(true, buffer, DEBUG);
+    console.log(true, bufferOut, DEBUG);
 
     
     console.log(true, "Connection closed.", DEBUG);

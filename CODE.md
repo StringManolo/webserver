@@ -1,10 +1,10 @@
 # CODE
 
 ├── [README.md](https://github.com/StringManolo/webserver/blob/master/README.md)    
-├── console.h  
-├── page.conf  
-├── read_config.c  
-└── serv.cpp
+├── [console.h](https://github.com/StringManolo/webserver/blob/master/console.h)  
+├── [page.conf](https://github.com/StringManolo/webserver/blob/master/page.conf)  
+├── [read_config.c](https://github.com/StringManolo/webserver/blob/master/read_config.c)  
+└── [serv.cpp](https://github.com/StringManolo/webserver/blob/master/serv.cpp)  
 
   
 0 directories, 5 files  

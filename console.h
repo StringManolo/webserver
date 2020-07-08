@@ -1,6 +1,9 @@
 #pragma once
 
 #include <string>
+#include <iostream>
+#include <fstream>
+#include <ctime>
 
 #define CRITICAL 1
 #define WARNING 2
@@ -28,15 +31,24 @@ struct CONSOLE {
       break;
       
       case VERBOSE:
-        if(param == 1) {
+        if(param == true) {
           std::cout << COLORS.GREEN << "INFO -----------------------------------------" << std::endl << message << std::endl << "------------------------------------------" << std::endl << COLORS.RESET << std::endl;
         }
       break;
       
       case DEBUG:
-        if(param == 1) {
-          std::cout << COLORS.BLUE << "DEBUG ----------------------------------------" << std::endl << message <<
+        if(param == true) {
+
+          time_t now = time(0);
+          char* date = ctime(&now);
+
+          std::cout << COLORS.BLUE << date << "DEBUG ----------------------------------------" << std::endl << message <<
             std::endl << "------------------------------------------" << std::endl << COLORS.RESET << std::endl;
+
+          std::ofstream logs;
+          logs.open("logs.txt", std::ios_base::app);
+          logs << date << "DEBUG ----------------------------------------" << std::endl << message << std::endl << "------------------------------------------" << std::endl << std::endl;
+
         }
       break;
     }

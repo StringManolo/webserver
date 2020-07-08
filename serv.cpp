@@ -19,18 +19,18 @@ int main(int argc, char **argv) {
   struct in_addr ip;
 
   if (!argv[1]) {
-    console.log(1, "YOU FORGOT PARAMETERS:\nAdd ip and port.\nExample: ./server 127.0.0.1 9090", CRITICAL);
+    console.log(true, "YOU FORGOT PARAMETERS:\nAdd ip and port.\nExample: ./server 127.0.0.1 9090", CRITICAL);
 
     return 0;
   } else if (!argv[2]) {
-    console.log(1, "YOU FORGOT PARAMETERS:\nAdd ip and port.\nExample: ./server 127.0.0.1 9090", CRITICAL);
+    console.log(true, "YOU FORGOT PARAMETERS:\nAdd ip and port.\nExample: ./server 127.0.0.1 9090", CRITICAL);
 
     return 0;
   }
 
   int sockfd = socket(AF_INET, SOCK_STREAM, 0);
   if (sockfd == ERROR) {
-    console.log(1, "Failed to create socket.", CRITICAL);
+    console.log(true, "Failed to create socket.", CRITICAL);
     return 1;
   }
 
@@ -42,34 +42,34 @@ int main(int argc, char **argv) {
 
   int sockbind = bind(sockfd, (struct sockaddr*)&sockaddr, sizeof(sockaddr));
   if (sockbind == ERROR) {
-    console.log(1, "Failed to bind to port", CRITICAL);
+    console.log(true, "Failed to bind to port", CRITICAL);
     return 2;
   }
 
   int socklist = listen(sockfd, 10);
   if (socklist == ERROR) {
-    console.log(1, "Failed to listen on socket.", CRITICAL);
+    console.log(true, "Failed to listen on socket.", CRITICAL);
     return 3;
   }
 
-  console.log(1, "Server is listening", VERBOSE);
+  console.log(true, "Server is listening", VERBOSE);
 
   for(;;) {
     auto addrlen = sizeof(sockaddr);
     int connection = accept(sockfd, (struct sockaddr*)&sockaddr, (socklen_t*)&addrlen);
 
     if (connection == ERROR) {
-      console.log(1, "Failed to grab connection.", DEBUG);
+      console.log(true, "Failed to grab connection.", DEBUG);
       /* nada */
     }
 
     char buffer[8192];
     auto bytesRead = read(connection, buffer, 8192);
-    console.log(1, "Connection recived", DEBUG);
-    console.log(1, buffer, DEBUG);
+    console.log(true, "Connection recived", DEBUG);
+    console.log(true, buffer, DEBUG);
 
     
-    console.log(1, "Connection closed.", DEBUG);
+    console.log(true, "Connection closed.", DEBUG);
     close(connection); 
   }
 

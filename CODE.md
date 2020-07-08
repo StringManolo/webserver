@@ -19,6 +19,7 @@
 ## **console.h**  
 * Exposed:
   * _console.log(bool, string, type)_  
+  
 * Intended for:
   * cout wrapper intended to split out messages in categories.  
 * Description:

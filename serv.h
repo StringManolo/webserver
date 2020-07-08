@@ -4,3 +4,5 @@ char *trim(char *str, const char *seps);
 int in_array(char **array, int size, char *lookfor );
 int index_of(const char **array, int size, char *lookfor );
 int read_config();
+
+map<string,string> _CONFIG;

@@ -9,7 +9,7 @@
 
 using namespace std;
 
-map<string,string> _CONFIG;
+
 
 int main()	{
 	read_config();

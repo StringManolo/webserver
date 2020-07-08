@@ -1,6 +1,6 @@
 CC = gcc
 CCPP = g++
-CFLAGS = -Wwrite-strings
+CFLAGS =
 
 default:
 
@@ -12,8 +12,8 @@ serv: read_config.o test_config.o
 test_config.o: test_config.cpp
 	$(CCPP) $(CFLAGS) -c test_config.cpp
 	
-read_config.o: read_config.c
-	$(CCPP) $(CFLAGS) -c read_config.c
+read_config.o: read_config.cpp
+	$(CCPP) $(CFLAGS) -c read_config.cpp
 
 clean:
 	rm *.o serv

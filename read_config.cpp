@@ -1,7 +1,11 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+#include <cstring>
+#include <cstdlib>
+#include <iostream>
+#include <unistd.h>
+#include <map>
 #include "serv.h"
+
+using namespace std;
 
 #define CONFIG_VAR_LENGTH_CONST 12
 
@@ -13,16 +17,22 @@ char const *variables_config[CONFIG_VAR_LENGTH_CONST] = {"IP","PORT","PATH","LOG
 int found_config[CONFIG_VAR_LENGTH_CONST] ={0,0,0,0,0,0,0,0,0,0,0,0};
 
 int read_config()	{
+	int  i = 0;
 	FILE *config = NULL;
 	config = fopen("serv.conf","r");
 	if(config == NULL)	{
+		while(i < CONFIG_VAR_LENGTH_CONST)	{
+			_CONFIG.insert(pair<string, string>(variables_config[i], defaults_config[i]));
+			i++;
+		}
+		
 		/*
 			We need to add default values to main config MAP variable.
 		*/
 		return 0;
 	}
 	else	{
-		int i = 0,line_length = 0,key_length = 0, value_length = 0,index_temp = 0;
+		int line_length = 0,key_length = 0, value_length = 0,index_temp = 0;
 		char *line = NULL,*aux,*key = NULL,*value = NULL;
 		line = (char*) malloc(1024);
 		while(fgets(line,1024,config) != NULL && !feof(config))	{
@@ -48,16 +58,19 @@ int read_config()	{
 							printf("Key found [%s] index %i : %s\n",key,index_temp,variables_config[index_temp]);
 							found_config[index_temp] = 1;
 							
+							_CONFIG.insert(pair<string, string>(key, value));
+							
 							/*
 								We need to add key and value  to a MAP global config
 								
 							*/
 						}
 						else	{
+							free(key);
+							free(value);
 							printf("Ignoring line with unexpected key: %s\n",line);	
 						}
-						free(key);
-						free(value);
+
 					}
 					else	{
 						printf("Ignoring line without value or key: %s\n",line);	
@@ -70,7 +83,6 @@ int read_config()	{
 			else	{
 				printf("Ignored comment line: %s\n",line);
 			}
-			i++;
 		}
 		free(line);
 		fclose(config);
@@ -78,7 +90,12 @@ int read_config()	{
 		/*
 		We need to add default values of not found keys to a Global config MAP
 		*/
+		while(i < CONFIG_VAR_LENGTH_CONST)	{
+			
+			i++;
+		}
 	}
+	
 	return 0;
 }
 

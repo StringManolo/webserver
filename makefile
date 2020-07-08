@@ -4,7 +4,7 @@ CFLAGS =
 
 default: serv
 
-serv:  serv.o read_config.o
+serv: read_config.o test_config.o
 	$(CCPP) -o serv test_config.o read_config.o
 
 test_config.o: test_config.cpp

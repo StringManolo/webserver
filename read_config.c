@@ -19,7 +19,7 @@ int found_config[CONFIG_VAR_LENGTH_CONST] ={0,0,0,0,0,0,0,0,0,0,0,0};
 
 int read_config()	{
 	FILE *config = NULL;
-	config = fopen("page.conf","r");
+	config = fopen("serv.conf","r");
 	if(config == NULL)	{
 		/*
 			We need to add default values to main config MAP variable.

@@ -2,11 +2,18 @@
 
 ├── [README.md](https://github.com/StringManolo/webserver/blob/master/FILES.md#readmemd)    
 ├── [console.h](https://github.com/StringManolo/webserver/blob/master/FILES.md#consoleh)  
-├── [page.conf](https://github.com/StringManolo/webserver/blob/master/FILES.md#pageconf)  
-├── [read_config.c](https://github.com/StringManolo/webserver/blob/master/FILES.md#read_configc)  
-└── [serv.cpp](https://github.com/StringManolo/webserver/blob/master/FILES.md#servcpp)  
+├── [makefile](https://github.com/StringManolo/webserver/blob/master/FILES.md#makefile)  
+├── [read_config.cpp](https://github.com/StringManolo/webserver/blob/master/FILES.md#read_configcpp)  
+├── [serv.conf](https://github.com/StringManolo/webserver/blob/master/FILES.md#servconf)  
+├── [serv.cpp](https://github.com/StringManolo/webserver/blob/master/FILES.md#servcpp)  
+├── [serv.h](https://github.com/StringManolo/webserver/blob/master/FILES.md#servh)  
+├── [test](https://github.com/StringManolo/webserver/blob/master/FILES.md#test)  
+│   ├── [read_config.c](https://github.com/StringManolo/webserver/blob/master/FILES.md#read_configc)  
+│   └── [serv.conf](https://github.com/StringManolo/webserver/blob/master/FILES.md#readconf)  
+├── [test_config.cpp](https://github.com/StringManolo/webserver/blob/master/FILES.md#testconfigcpp)  
+└── [utils.h](https://github.com/StringManolo/webserver/blob/master/FILES.md#utilsh)
   
-0 directories, 5 files  
+1 directory, 11 files  
   
 &nbsp;  
   

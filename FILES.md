@@ -96,5 +96,38 @@ DEBUG also outputs current time and logs messages to logs.txt
 &nbsp;
   
 ## **[utils.h](https://github.com/StringManolo/webserver/blob/master/utils.h)**  
+###### Exposed:  
   
+   _utils.split(string, char, &vector<string>)_  
+  
+###### Intended for:  
+  
+   Split a string content into a vector of strings using a char as delimitator.  
+###### Description:
+  
+   Parse http requests to get method, path, version, headers...
+  
+   1st parameter is a string holding the text to split.  
+  
+   2st parameter is the delimitator used as split point.  
+  
+   3rd parameter vector to hold the splited strings.  
+###### Example:
+```
+#include <vector>
+#include <string>
+#include "utils.h"
 
+
+int main() {
+  UTILS utils;
+  std::string content = "Hello World";
+  std::vector<std::string> strings;
+
+  utils.split(content, ' ', strings);
+  cout << strings[0] << " this is my " << strings[1];
+
+  return 0;
+}
+```
+  

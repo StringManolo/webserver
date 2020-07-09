@@ -59,6 +59,10 @@ DEBUG also outputs current time and logs messages to logs.txt
   
 &nbsp;  
   
+## **[makefile](https://github.com/StringManolo/webserver/blob/master/makefile)**  
+  
+&nbsp;
+  
 ## **[page.conf](https://github.com/StringManolo/webserver/blob/master/page.conf)**  
   
 &nbsp;  

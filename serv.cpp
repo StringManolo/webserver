@@ -22,15 +22,7 @@ UTILS utils;
 #define ERROR -1
 
 /* Make conditionals readable. */
-#define GET (tmpString[0] == 'G')
-#define POST (tmpString[0] == 'P' && tmpString[1] == 'O')
-#define HEAD (tmpString[0] == 'H')
-#define OPTIONS (tmpString[0] == 'O')
-#define PUT (tmpString[0] == 'P' && tmpString[1] == 'U')
-#define TRACE (tmpString[0] == 'T')
-#define PATCH (tmpString[0] == 'P' && tmpString[1] == 'A')
-#define DELETE (tmpString[0] == 'D')
-
+#define REQUEST j == 0
 
 int main(int argc, char **argv) {
 
@@ -96,60 +88,83 @@ int main(int argc, char **argv) {
     struct HTTP {
       std::string method = "";
       std::string path = "";
-      std::string version = ""; 
+      std::string version = "";
+
+      std::vector<std::string> headers;
+      std::string body = "";
+      int headersEnd = 0;
     };
     
     HTTP http;
 
     std::vector<std::string> tmpVec, strings;
     std::string tmpString;
-    for(int i = 0, j = 0; i < buffer.size()-1; ++i) {
-        if(buffer[i] == '\n') {
-          /* Debug/raw */ tmpVec.push_back(tmpString);
-	  switch(j) {
-	    case 0: /* Primera linea */
+    for(int i = 0, j = 0; i < buffer.size(); ++i) {
+      if(buffer[i] == '\n' || (buffer[i] == '\0' && buffer[i+1] != '\0')) {
+        /* Debug/raw */ 
+	tmpVec.push_back(tmpString);
+	/* console.log(true, tmpString, VERBOSE); */
 
-              if GET {
-		console.log(true, "GET", DEBUG);
-        
-		utils.split(tmpString, ' ', strings);
-                http.method = strings[0];
-		http.path = strings[1];
-		http.version = strings[2];
-
-
-
-		std::cout << "method: " << http.method << std::endl;
-		std::cout << "path: " << http.path << std::endl << std::endl;
-                std::cout << "version: " << http.version << std::endl;
-
-	      } else if POST {
-	        console.log(true, "POST", DEBUG);
-	      } else if HEAD {
-                console.log(true, "HEAD", DEBUG);
-	      } else if OPTIONS {
-                console.log(true, "OPTIONS", DEBUG);
-	      } else if PUT {
-                console.log(true, "PUT", DEBUG);
-	      } else if TRACE {
-                console.log(true, "TRACE", DEBUG);
-	      } else if PATCH {
-                console.log(true, "PATCH", DEBUG);
-	      } else if DELETE {
-                console.log(true, "DELETE", DEBUG);
-	      } else {
-	        console.log(true, "Not valid http method found.", DEBUG);
-	      }
-            break;
-
-
-	  }
-	  ++j;
+	tmpString = "";
+	++j;
       }
-        tmpString += buffer[i];
+      tmpString += buffer[i];
+    } 
+
+
+    for(int k = 0; k < tmpVec.size(); ++k) {
+      for(int l = 0; l < tmpVec[k].size(); ++l) {
+        if(static_cast<char>(tmpVec[k][l]) == '\r') {
+      /*  console.log(true, "Encontrado r", WARNING); */
+          tmpVec[k][l] = '\0';
+	} if (static_cast<char>(tmpVec[k][l]) == '\n') {
+      /* console.log(true, "Encontrado n", WARNING); */
+          tmpVec[k][l] = '\0';
+	}
+      }
+
+      if (k == 0) {
+
+	utils.split(tmpVec[k], ' ', strings);
+	http.method = strings[0];
+	http.path = strings[1];
+	http.version = strings[2];
+
+      }
+
+      if (k > 0) {
+	
+        /* End of headers */
+        if (tmpVec[k].size() == 2) {
+
+	  /* Set only once */
+	  if (http.headersEnd == 0) {
+            http.headersEnd = k;
+	  }
+	}
+
+	if (http.headersEnd == 0) {
+          http.headers.push_back(tmpVec[k]);
+	} else {
+          http.body += tmpVec[k];
+	}
+	
+      }
+
+     /* std::cout << "HEADER:" << tmpVec[k] << std::endl << std::endl; */
     }
 
-    std::cout << "Test: " << tmpVec[0] << std::endl;
+
+    std::cout << "Method: " << http.method << std::endl;
+    std::cout << "Path: " << http.path << std::endl;
+    std::cout << "Version: " << http.version << std::endl;
+
+    for (int i = 0; i < http.headers.size(); ++i) {
+      std::cout << "Header" << i+1 << ":"
+        << http.headers[i] << std::endl;
+    }
+
+    std::cout << "Body: " << http.body << std::endl;
 
     console.log(true, "Connection closed.", DEBUG);
     close(connection); 

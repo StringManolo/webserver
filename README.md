@@ -10,9 +10,9 @@ Use Cases:
 &nbsp:
   
 ## Users:
-+  Lore ipsum...  
++  [INSTALL](https://github.com/StringManolo/webserver/blob/master/INSTALL.md)  
   
 ## Developers:  
-+  [Files](https://github.com/StringManolo/webserver/blob/master/FILES.md)  
++  [DOCUMENTATION](https://github.com/StringManolo/webserver/blob/master/FILES.md)  
 
   

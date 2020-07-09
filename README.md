@@ -1,5 +1,5 @@
 # webserver (under development)
-######   DEVELOPERS: 
+######   By: 
 + [albertobsd](https://github.com/albertobsd)
 + [stringmanolo](https://github.com/StringManolo)  
   

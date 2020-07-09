@@ -83,11 +83,11 @@ DEBUG also outputs current time and logs messages to logs.txt
   
 &nbsp;
   
-+  ## **[read_config.c](https://github.com/StringManolo/webserver/blob/master/test/read_configc)**  
++  ### **[read_config.c](https://github.com/StringManolo/webserver/blob/master/test/read_configc)**  
   
 &nbsp;
   
-+  ## **[serv.conf](https://github.com/StringManolo/webserver/blob/master/test/readconf)**  
++  ### **[serv.conf](https://github.com/StringManolo/webserver/blob/master/test/readconf)**  
   
 &nbsp;
   

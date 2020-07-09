@@ -5,7 +5,6 @@
 #include <map>
 #include "serv.h"
 
-using namespace std;
 
 #define CONFIG_VAR_LENGTH_CONST 12
 
@@ -22,7 +21,7 @@ int read_config()	{
 	config = fopen("serv.conf","r");
 	if(config == NULL)	{
 		while(i < CONFIG_VAR_LENGTH_CONST)	{
-			_CONFIG.insert(pair<string, string>(variables_config[i], defaults_config[i]));
+			_CONFIG.insert(std::pair<std::string,std::string>(variables_config[i], defaults_config[i]));
 			i++;
 		}
 		
@@ -58,7 +57,7 @@ int read_config()	{
 							printf("Key found [%s] index %i : %s\n",key,index_temp,variables_config[index_temp]);
 							found_config[index_temp] = 1;
 							
-							_CONFIG.insert(pair<string, string>(key, value));
+							_CONFIG.insert(std::pair<std::string,std::string>(key, value));
 							
 							/*
 								We need to add key and value  to a MAP global config

@@ -102,11 +102,11 @@ DEBUG also outputs current time and logs messages to logs.txt
   
 ###### Intended for:  
   
-   Split a string content into a vector of strings using a char as delimitator.  
+   Parse http requests to get method, path, version, headers...
 ###### Description:
   
-   Parse http requests to get method, path, version, headers...
-  
+   Split a string content into a vector of strings using a char as delimitator.  
+
    1st parameter is a string holding the text to split.  
   
    2st parameter is the delimitator used as split point.  

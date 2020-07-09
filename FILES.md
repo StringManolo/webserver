@@ -67,7 +67,7 @@ DEBUG also outputs current time and logs messages to logs.txt
   
 &nbsp;
   
-## **[serv.conf](https://github.com/StringManolo/webserver/blob/master/servconf)**  
+## **[serv.conf](https://github.com/StringManolo/webserver/blob/master/serv.conf)**  
   
 &nbsp;
   

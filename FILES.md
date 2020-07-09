@@ -62,15 +62,39 @@ DEBUG also outputs current time and logs messages to logs.txt
 ## **[makefile](https://github.com/StringManolo/webserver/blob/master/makefile)**  
   
 &nbsp;
+
+## **[read_config.cpp](https://github.com/StringManolo/webserver/blob/master/read_configcpp)**  
   
-## **[page.conf](https://github.com/StringManolo/webserver/blob/master/page.conf)**  
+&nbsp;
   
-&nbsp;  
+## **[serv.conf](https://github.com/StringManolo/webserver/blob/master/servconf)**  
   
-## **[read_config.c](https://github.com/StringManolo/webserver/blob/master/read_config.c)**  
+&nbsp;
   
-&nbsp;  
+## **[serv.cpp](https://github.com/StringManolo/webserver/blob/master/servcpp)**  
   
-## **[serv.cpp](https://github.com/StringManolo/webserver/blob/master/serv.cpp)**  
+&nbsp;
   
+## **[serv.h](https://github.com/StringManolo/webserver/blob/master/servh)**  
   
+&nbsp;
+  
+## **[test](https://github.com/StringManolo/webserver/blob/master/test)**  
+  
+&nbsp;
+  
+  ## **[read_config.c](https://github.com/StringManolo/webserver/blob/master/test/read_configc)**  
+  
+&nbsp;
+  
+  ## **[serv.conf](https://github.com/StringManolo/webserver/blob/master/test/readconf)**  
+  
+&nbsp;
+  
+## **[test_config.cpp](https://github.com/StringManolo/webserver/blob/master/testconfigcpp)**  
+  
+&nbsp;
+  
+## **[utils.h](https://github.com/StringManolo/webserver/blob/master/utilsh)**  
+  
+

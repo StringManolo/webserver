@@ -87,11 +87,11 @@ DEBUG also outputs current time and logs messages to logs.txt
   
 &nbsp;
   
-+  ### **[serv.conf](https://github.com/StringManolo/webserver/blob/master/test/read.conf)**  
++  ### **[serv.conf](https://github.com/StringManolo/webserver/blob/master/test/serv.conf)**  
   
 &nbsp;
   
-## **[test_config.cpp](https://github.com/StringManolo/webserver/blob/master/testconfig.cpp)**  
+## **[test_config.cpp](https://github.com/StringManolo/webserver/blob/master/test_config.cpp)**  
   
 &nbsp;
   

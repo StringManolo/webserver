@@ -1,7 +1,7 @@
 # webserver (under development)
-DEVELOPERS: 
+###DEVELOPERS: 
 + [albertobsd](https://github.com/albertobsd)
-+ [@stringmanolo](https://github.com/StringManolo)  
++ [stringmanolo](https://github.com/StringManolo)  
   
 ## Description:
   Lore ipsum ...

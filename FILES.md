@@ -88,6 +88,8 @@ DEBUG also outputs current time and logs messages to logs.txt
   
 ###### Example:
 ```
+#include <iostream>
+#include <vector>
 #include "http.h"
 
 int main() {

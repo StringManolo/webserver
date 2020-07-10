@@ -64,10 +64,15 @@ DEBUG also outputs current time and logs messages to logs.txt
 ###### Exposed:  
   
    _http_p.parser(vector<char>, struct HTTP &http)_  
+  
    _http.method_  
-   _http.path_
+  
+   _http.path_  
+  
    _http.version_  
+  
    _http.headers[i]_  
+  
    _http.body_  
    
 ###### Intended for:  

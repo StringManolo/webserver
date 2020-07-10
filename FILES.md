@@ -2,6 +2,7 @@
 
 ├── [README.md](https://github.com/StringManolo/webserver/blob/master/FILES.md#readmemd)    
 ├── [console.h](https://github.com/StringManolo/webserver/blob/master/FILES.md#consoleh)  
+├── [http.h](https://github.com/StringManolo/webserver/blob/master/FILES.md#httph)  
 ├── [makefile](https://github.com/StringManolo/webserver/blob/master/FILES.md#makefile)  
 ├── [read_config.cpp](https://github.com/StringManolo/webserver/blob/master/FILES.md#read_configcpp)  
 ├── [serv.conf](https://github.com/StringManolo/webserver/blob/master/FILES.md#servconf)  
@@ -59,6 +60,45 @@ DEBUG also outputs current time and logs messages to logs.txt
   
 &nbsp;  
   
+## **[http.h](https://github.com/StringManolo/webserver/blob/master/http.h)**  
+###### Exposed:  
+  
+   _http_p.parser(vector<char>, struct HTTP &http)_  
+   _http.method_  
+   _http.path_
+   _http.version_  
+   _http.headers[i]_  
+   _http.body_  
+   
+###### Intended for:  
+  
+   Intended to parse and recive http headers.
+###### Description:
+  
+   Read a vector of chars(acts as buffer) to iterate over and extract the http headers and body.
+  
+   1st parameter is the vector of chars of any size holding the http request recived by the server.  
+  
+   2st parameter is a reference of a HTTP custom type what is going to be filled by the http_p.parser() method.
+  
+###### Example:
+```
+#include "http.h"
+
+int main() {
+  HTTP http;
+  HTTP_PARSER http_p;
+  
+  http_p.parser(buffer, http);
+  cout << http.method;
+
+  return 0;
+}
+```
+  
+&nbsp;
+  
+
 ## **[makefile](https://github.com/StringManolo/webserver/blob/master/makefile)**  
   
 &nbsp;

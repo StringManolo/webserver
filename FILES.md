@@ -94,6 +94,10 @@ int main() {
   HTTP http;
   HTTP_PARSER http_p;
   
+  /* ... Your sockets implementation */
+  std::vector<char> buffer(2048);
+  auto bytesRead = read(connection, &buffer[0], buffer.size());
+
   http_p.parser(buffer, http);
   cout << http.method;
 

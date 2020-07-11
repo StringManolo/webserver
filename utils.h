@@ -9,9 +9,9 @@ struct UTILS {
     for (int i = 0; i < str.length(); ++i) {
       if (str[i] != character) {
         holder += str[i];
-        std::cout << "Found " << str[i] << std::endl;
+       /* std::cout << "Found " << str[i] << std::endl; */
       } else {
-        std::cout << "Found space" << std::endl;
+       /*std::cout << "Found space" << std::endl; */
         strings.push_back(holder);
         holder = "";
       }

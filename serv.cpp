@@ -59,7 +59,7 @@ int main(int argc, char **argv) {
   }
 
   read_config(); 
-  console.log(true,"IP in serv.conf" + _CONFIG["IP"],DEBUG);
+  console.log(true,"IP in serv.conf " + _CONFIG["IP"],DEBUG);
   
   int sockfd = socket(AF_INET, SOCK_STREAM, 0);
   if (sockfd == ERROR) {
@@ -86,7 +86,7 @@ int main(int argc, char **argv) {
   }
 
   console.log(true, "Server is listening", VERBOSE);
-
+  console.log(true,"PATH in serv.conf " + _CONFIG["PATH"],DEBUG);
   std::string publicDir = "./public";
   int tmpErr = 8;
   tmpErr = chdir (publicDir.c_str());

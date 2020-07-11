@@ -7,7 +7,7 @@ int index_of(char const **array, int size, char *lookfor );
 
 int config_var_length = CONFIG_VAR_LENGTH_CONST;
 
-char const *defaults_config[CONFIG_VAR_LENGTH_CONST] = {"localhost","80","./public_html","./access.log","30","1048576","","OFF","ON","443","./cert.pem","./key.pem"};
+char const *defaults_config[CONFIG_VAR_LENGTH_CONST] = {"localhost","80","./public","./access.log","30","1048576","","OFF","ON","443","./cert.pem","./key.pem"};
 char const *variables_config[CONFIG_VAR_LENGTH_CONST] = {"IP","PORT","PATH","LOGFILE","TIMEOUT","MAXREQUESTSIZE","CACHEFILES","DIRLIST","SSL","SSLPORT","CERTFILE","CERTKEY"};
 
 int found_config[CONFIG_VAR_LENGTH_CONST] ={0,0,0,0,0,0,0,0,0,0,0,0};
@@ -39,8 +39,9 @@ int read_config()	{
 				if(aux != NULL)	{
 					key_length = aux -line;
 					value_length = line_length-key_length - 1 ;
-					printf("Line with value: %s\n",line);
+					/*printf("Line with value: %s\n",line);
 					printf("%i - %i\n",key_length,value_length);
+						*/
 					if(key_length > 0 && value_length > 0)	{
 						key = (char*) calloc(key_length+1,1);
 						value = (char*) calloc(value_length+1,1);
@@ -48,10 +49,14 @@ int read_config()	{
 						memcpy(value,aux+1,value_length);
 						trim(key,NULL);
 						trim(value,NULL);
+						/*
 						printf("Key : %s\n",key);
 						printf("Value : %s\n",value);
+						*/
 						if((index_temp = index_of(variables_config,CONFIG_VAR_LENGTH_CONST,key)) >= 0){
-							printf("Key found [%s] index %i : %s\n",key,index_temp,variables_config[index_temp]);
+
+
+							//printf("Key found [%s] index %i : %s\n",key,index_temp,variables_config[index_temp]);
 							found_config[index_temp] = 1;
 							
 							_CONFIG.insert(std::pair<std::string,std::string>(key, value));
@@ -59,20 +64,20 @@ int read_config()	{
 						else	{
 							free(key);
 							free(value);
-							printf("Ignoring line with unexpected key: %s\n",line);	
+							//printf("Ignoring line with unexpected key: %s\n",line);	
 						}
 
 					}
 					else	{
-						printf("Ignoring line without value or key: %s\n",line);	
+						//printf("Ignoring line without value or key: %s\n",line);	
 					}
 				}
 				else	{
-					printf("Ignored line without equal sign: %s\n",line);
+//					printf("Ignored line without equal sign: %s\n",line);
 				}
 			}
 			else	{
-				printf("Ignored comment line: %s\n",line);
+//				printf("Ignored comment line: %s\n",line);
 			}
 		}
 		free(line);
@@ -86,6 +91,7 @@ int read_config()	{
 			i++;
 		}
 	}
+	_CONFIG["PATH"] = realpath(_CONFIG["PATH"].c_str(),NULL);
 	return 0;
 }
 

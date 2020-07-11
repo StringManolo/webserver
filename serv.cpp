@@ -21,13 +21,16 @@ UTILS utils;
 HTTP http;
 HTTP_PARSER http_p;
 
-/* pwd defined here */
+/* pwd && getFileList defined here */
 #include "directories.h"
 DIRECTORIES dir;
+
 
 /* error pages defined here */
 #include "pages.h"
 PAGES page; 
+
+
 
 /* Make cli params readable */
 #define HOST_PORT atoi(argv[2])
@@ -109,6 +112,17 @@ int main(int argc, char **argv) {
     std::cout << page.error.fourZeroFour << std::endl << std::endl;
     std::cout << page.error.fiveZeroZero << std::endl << std::endl;
     std::cout << page.error.fiveZeroThree << std::endl << std::endl; */
+
+
+    /* List files and folders */
+    /* std::vector<std::string> files;
+    const char * pwd  = dir.pwd.c_str();
+    files = dir.getFileList(pwd);
+
+    for(int i = 0; i < files.size(); ++i) {
+      std::cout << files[i] << std::endl;
+    } */
+
 
     close(connection); 
   }

@@ -21,6 +21,14 @@ UTILS utils;
 HTTP http;
 HTTP_PARSER http_p;
 
+/* pwd defined here */
+#include "directories.h"
+DIRECTORIES dir;
+
+/* error pages defined here */
+#include "pages.h"
+PAGES page; 
+
 /* Make cli params readable */
 #define HOST_PORT atoi(argv[2])
 #define HOST_IP inet_aton(argv[1], &ip)
@@ -89,6 +97,18 @@ int main(int argc, char **argv) {
     http_p.parser(buffer, http);
     console.log(true, http.method, DEBUG);
     console.log(true, http.body, DEBUG);
+
+
+    /* Working Dir */
+    /* std::cout << dir.pwd << std::endl; */
+
+    /* Default Error Pages */
+    /* std::cout << page.error.fourZeroZero << std::endl << std::endl;
+    std::cout << page.error.fourZeroOne << std::endl << std::endl;
+    std::cout << page.error.fourZeroThree << std::endl << std::endl;
+    std::cout << page.error.fourZeroFour << std::endl << std::endl;
+    std::cout << page.error.fiveZeroZero << std::endl << std::endl;
+    std::cout << page.error.fiveZeroThree << std::endl << std::endl; */
 
     close(connection); 
   }

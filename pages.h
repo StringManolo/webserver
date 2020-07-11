@@ -19,6 +19,10 @@ struct HTMLTEMPLATE {
 struct PAGES {
 
   struct ERROR {
+    /* 200 */
+    std::vector<std::string> twoZeroZeroV {"200 - Congratz", "200","Your server is working fine."};                     std::string twoZeroZero = ht.makeTemplate(twoZeroZeroV);
+
+
     /* 400 */                                                  std::vector<std::string> fourZeroZeroV {"400 - Bad Request", "400", "The request is not valid."};
     std::string fourZeroZero = ht.makeTemplate(fourZeroZeroV);
 

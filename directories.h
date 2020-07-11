@@ -39,7 +39,7 @@ std::vector<std::string> getFileList(const char *path)	{
 			directorio_path[len_directorio_path+1] = '\0';
 		}
 		//printf("Directorio: %s\n",directorio_path);
-		while(file_dir = readdir(dir_temp)){
+		while((file_dir = readdir(dir_temp))){
 			archivo_dir = NULL;
 			if(strcmp(file_dir->d_name,".") != 0 && strcmp(file_dir->d_name,"..") != 0){
 				///printf("examinando %s\n",file_dir->d_name);

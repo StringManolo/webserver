@@ -6,6 +6,7 @@ struct HTTP {
       std::vector<std::string> headers;
       std::string body = "";
       int headersEnd = 0;
+
 };
 
 struct HTTP_PARSER {

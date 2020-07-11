@@ -129,6 +129,40 @@ int main(int argc, char **argv) {
       std::cout << files[i] << std::endl;
     } */
 
+    /* Server Response */
+    std::string rH = "";
+    if (http.method == "GET" || http.method == "HEAD") {
+      /* Find Path */
+      const char * reqPath = http.path.c_str();
+      const char * reqFile = http.path.substr(1, http.path.size()).c_str();
+      if (dir.isDirectory(reqPath)) {
+        std::cout << reqPath << " is a directory." << std::endl;
+        /* Check in config if is allowed directory listing.
+	 * else throw 403 */
+	rH = "";
+	rH += "HTTP/1.1 403 Forbidden";
+	rH += "\r\n\r\n";
+	rH += page.error.fourZeroThree;
+	rH += "\r\n\r\n";
+
+      } else if (dir.is_regular_file(reqFile)) {
+        std::cout << reqPath << " is a file." << std::endl;
+        rH = "";
+	rH += "HTTP/1.1 200 OK";
+	rH += "\r\n\r\n";
+	rH += page.error.twoZeroZero;
+	rH += "\r\n\r\n";
+        
+      } else {
+        rH = "";
+        rH += "HTTP/1.1 404 Not Found ";
+	rH += "\r\n\r\n";
+	rH += page.error.fourZeroFour;
+	rH += "\r\n\r\n";
+      }
+
+      send(connection, rH.c_str(), rH.length(), 0);
+    }
 
     close(connection); 
   }

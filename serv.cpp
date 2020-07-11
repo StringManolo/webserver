@@ -91,9 +91,7 @@ int main(int argc, char **argv) {
 
 
   /* Change dir */
-  std::string publicDir = "./public";
-  int tmpErr = 8;
-  tmpErr = chdir (publicDir.c_str());
+  //std::string publicDir = realpath(_CONFIG["PATH"].c_str(),NULL);
 
   for(;;) {
     auto addrlen = sizeof(sockaddr);
@@ -140,39 +138,37 @@ int main(int argc, char **argv) {
 
     /* Server Response */
     std::string rH = "";
+	
+	if(strcmp(http.path.c_str(),"/") == 0)	{
+		http.path = "/index.html";
+	}
+
     if (http.method == "GET" || http.method == "HEAD") {
       /* Find Path */
-      std::string fullPath = http.path;
-      const char * reqPath = fullPath.c_str();
-      const char * reqFile = fullPath.substr(1, fullPath.size()).c_str();
+      std::string fullPath = _CONFIG["PATH"] + http.path;
+      const char * reqFile = fullPath.c_str();
 
+      std::cout << "MECAGOENMISMUERTOS: " << reqFile << std::endl;
 
-      std::cout << "MECAGOENMISMUERTOS:" << reqPath << std::endl;
-
-      std::cout << "MECAGOENMISMUERTOS:" << reqFile << std::endl;
-      if (dir.isDirectory(reqPath)) {
-        std::cout << reqPath << " is a directory." << std::endl;
-        if(fullPath.substr(0,1) == "/") {
-	  std::cout << "check if INDEX.HTML" << std::endl;
-          /* Check for index.html file */
-        } else {
+      if (dir.isDirectory(reqFile)) {
+        std::cout << reqFile << " is a directory." << std::endl;
           if (_CONFIG["DIRLIST"] == "ON") {
             /* Show dirs and links when GET /folder/ */
-	  } else {
-	    rH = "";
-	    rH += "HTTP/1.1 403 Forbidden";
-	    rH += "\r\n\r\n";
-	    rH += page.error.fourZeroThree;
-	    rH += "\r\n\r\n";
-	  }
-        }
-      } else if (dir.is_regular_file(reqFile)) {
-        std::cout << reqPath << " is a file." << std::endl;
+		  }
+		  else {
+			rH = "";
+			rH += "HTTP/1.1 403 Forbidden";
+			rH += "\r\n\r\n";
+			rH += page.error.fourZeroThree;
+			rH += "\r\n\r\n";
+          }
+	  } else if (dir.is_regular_file(reqFile)) {
+        std::cout << reqFile << " is a file." << std::endl;
         rH = "";
-	rH += "HTTP/1.1 200 OK";
-	rH += "\r\n\r\n";
-	rH += page.error.twoZeroZero;
-	rH += "\r\n\r\n";
+		rH += "HTTP/1.1 200 OK";
+		rH += "\r\n\r\n";
+		rH += page.error.twoZeroZero;
+		rH += "\r\n\r\n";
         
       } else {
         rH = "";

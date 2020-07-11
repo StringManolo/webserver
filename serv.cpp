@@ -7,6 +7,7 @@
 #include <vector>
 #include <map>
 #include <array>
+#include <errno.h>
 
 /* console.log defined here */
 #include "console.h"
@@ -86,6 +87,15 @@ int main(int argc, char **argv) {
 
   console.log(true, "Server is listening", VERBOSE);
 
+  std::string publicDir = "./public";
+  int tmpErr = 8;
+  tmpErr = chdir (publicDir.c_str());
+  std::cout << "Err: " << strerror(errno) << std::endl;
+  std::cout << "chdir returns " << tmpErr << std::endl;
+
+
+  std::cout << "WD:" <<  dir.pwd << std::endl;
+
   for(;;) {
     auto addrlen = sizeof(sockaddr);
     int connection = accept(sockfd, (struct sockaddr*)&sockaddr, (socklen_t*)&addrlen);
@@ -135,6 +145,11 @@ int main(int argc, char **argv) {
       /* Find Path */
       const char * reqPath = http.path.c_str();
       const char * reqFile = http.path.substr(1, http.path.size()).c_str();
+     /* resource inside public folder */
+      
+     if (dir.pwd + "/public/" == dir.pwd + http.path.substr(0, 8) ) {
+      console.log(true, "Requested resource is inside public folder" ,DEBUG);
+
       if (dir.isDirectory(reqPath)) {
         std::cout << reqPath << " is a directory." << std::endl;
         if(reqPath == "/") {
@@ -165,10 +180,16 @@ int main(int argc, char **argv) {
 	rH += page.error.fourZeroFour;
 	rH += "\r\n\r\n";
       }
-
+      
       send(connection, rH.c_str(), rH.length(), 0);
+     } else {
+       rH = "";
+       rH += "HTTP/1.1 403 Forbidden";
+       rH += "\r\n\r\n";
+       rH += page.error.fourZeroThree;
+       rH += "\r\n\r\n"; 
+     }
     }
-
     std::cout <<  "conf : " <<  _CONFIG["DIRLIST"] << std::endl;
     close(connection); 
   }

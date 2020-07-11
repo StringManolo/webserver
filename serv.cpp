@@ -25,6 +25,9 @@ HTTP_PARSER http_p;
 #include "directories.h"
 DIRECTORIES dir;
 
+/* read config */
+#include "conf.h"
+
 
 /* error pages defined here */
 #include "pages.h"
@@ -53,7 +56,10 @@ int main(int argc, char **argv) {
 
     return 0;
   }
-
+  read_config();
+  
+  console.log(true,"IP in serv.conf" + _CONFIG["IP"],DEBUG);
+  
   int sockfd = socket(AF_INET, SOCK_STREAM, 0);
   if (sockfd == ERROR) {
     console.log(true, "Failed to create socket.", CRITICAL);

@@ -1,10 +1,7 @@
-#include <cstring>
-#include <cstdlib>
-#include <iostream>
-#include <unistd.h>
-#include <map>
-#include "serv.h"
-
+char *ltrim(char *str, const char *seps);
+char *rtrim(char *str, const char *seps);
+char *trim(char *str, const char *seps);
+int index_of(char const **array, int size, char *lookfor );
 
 #define CONFIG_VAR_LENGTH_CONST 12
 
@@ -14,6 +11,8 @@ char const *defaults_config[CONFIG_VAR_LENGTH_CONST] = {"localhost","80","./publ
 char const *variables_config[CONFIG_VAR_LENGTH_CONST] = {"IP","PORT","PATH","LOGFILE","TIMEOUT","MAXREQUESTSIZE","CACHEFILES","DIRLIST","SSL","SSLPORT","CERTFILE","CERTKEY"};
 
 int found_config[CONFIG_VAR_LENGTH_CONST] ={0,0,0,0,0,0,0,0,0,0,0,0};
+
+
 
 std::map<std::string,std::string> _CONFIG;
 
@@ -26,10 +25,6 @@ int read_config()	{
 			_CONFIG.insert(std::pair<std::string,std::string>(variables_config[i], defaults_config[i]));
 			i++;
 		}
-		
-		/*
-			We need to add default values to main config MAP variable.
-		*/
 		return 0;
 	}
 	else	{
@@ -60,11 +55,6 @@ int read_config()	{
 							found_config[index_temp] = 1;
 							
 							_CONFIG.insert(std::pair<std::string,std::string>(key, value));
-							
-							/*
-								We need to add key and value  to a MAP global config
-								
-							*/
 						}
 						else	{
 							free(key);
@@ -87,16 +77,15 @@ int read_config()	{
 		}
 		free(line);
 		fclose(config);
-		
-		/*
-		We need to add default values of not found keys to a Global config MAP
-		*/
+
 		while(i < CONFIG_VAR_LENGTH_CONST)	{
-			
+			if(found_config[i] == 0)	{
+				_CONFIG.insert(std::pair<std::string,std::string>(variables_config[i], defaults_config[i]));
+			i++;
+			}
 			i++;
 		}
 	}
-	
 	return 0;
 }
 
@@ -155,12 +144,3 @@ int index_of(char const **array, int size, char *lookfor )
             return i;
     return -1;
 }
-
-/*
-
-int main()	{
-	read_config();
-	
-}
-*/
-

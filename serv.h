@@ -5,4 +5,3 @@ int in_array(char **array, int size, char *lookfor );
 int index_of(const char **array, int size, char *lookfor );
 int read_config();
 
-std::map<std::string,std::string> _CONFIG;

@@ -86,15 +86,14 @@ int main(int argc, char **argv) {
   }
 
   console.log(true, "Server is listening", VERBOSE);
+
   console.log(true,"PATH in serv.conf " + _CONFIG["PATH"],DEBUG);
+
+
+  /* Change dir */
   std::string publicDir = "./public";
   int tmpErr = 8;
   tmpErr = chdir (publicDir.c_str());
-  std::cout << "Err: " << strerror(errno) << std::endl;
-  std::cout << "chdir returns " << tmpErr << std::endl;
-
-
-  std::cout << "WD:" <<  dir.pwd << std::endl;
 
   for(;;) {
     auto addrlen = sizeof(sockaddr);
@@ -143,16 +142,18 @@ int main(int argc, char **argv) {
     std::string rH = "";
     if (http.method == "GET" || http.method == "HEAD") {
       /* Find Path */
-      const char * reqPath = http.path.c_str();
-      const char * reqFile = http.path.substr(1, http.path.size()).c_str();
-     /* resource inside public folder */
-      
-     if (dir.pwd + "/public/" == dir.pwd + http.path.substr(0, 8) ) {
-      console.log(true, "Requested resource is inside public folder" ,DEBUG);
+      std::string fullPath = http.path;
+      const char * reqPath = fullPath.c_str();
+      const char * reqFile = fullPath.substr(1, fullPath.size()).c_str();
 
+
+      std::cout << "MECAGOENMISMUERTOS:" << reqPath << std::endl;
+
+      std::cout << "MECAGOENMISMUERTOS:" << reqFile << std::endl;
       if (dir.isDirectory(reqPath)) {
         std::cout << reqPath << " is a directory." << std::endl;
-        if(reqPath == "/") {
+        if(fullPath.substr(0,1) == "/") {
+	  std::cout << "check if INDEX.HTML" << std::endl;
           /* Check for index.html file */
         } else {
           if (_CONFIG["DIRLIST"] == "ON") {
@@ -182,13 +183,16 @@ int main(int argc, char **argv) {
       }
       
       send(connection, rH.c_str(), rH.length(), 0);
-     } else {
+/*     } else {
        rH = "";
        rH += "HTTP/1.1 403 Forbidden";
        rH += "\r\n\r\n";
        rH += page.error.fourZeroThree;
        rH += "\r\n\r\n"; 
-     }
+       }
+*/
+
+
     }
     std::cout <<  "conf : " <<  _CONFIG["DIRLIST"] << std::endl;
     close(connection); 

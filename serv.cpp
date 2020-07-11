@@ -56,8 +56,8 @@ int main(int argc, char **argv) {
 
     return 0;
   }
-  read_config();
-  
+
+  read_config(); 
   console.log(true,"IP in serv.conf" + _CONFIG["IP"],DEBUG);
   
   int sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -104,8 +104,8 @@ int main(int argc, char **argv) {
 
     /* http parser call */
     http_p.parser(buffer, http);
-    console.log(true, http.method, DEBUG);
-    console.log(true, http.body, DEBUG);
+    /* console.log(true, http.method, DEBUG);
+    console.log(true, http.body, DEBUG); */
 
 
     /* Working Dir */
@@ -137,14 +137,19 @@ int main(int argc, char **argv) {
       const char * reqFile = http.path.substr(1, http.path.size()).c_str();
       if (dir.isDirectory(reqPath)) {
         std::cout << reqPath << " is a directory." << std::endl;
-        /* Check in config if is allowed directory listing.
-	 * else throw 403 */
-	rH = "";
-	rH += "HTTP/1.1 403 Forbidden";
-	rH += "\r\n\r\n";
-	rH += page.error.fourZeroThree;
-	rH += "\r\n\r\n";
-
+        if(reqPath == "/") {
+          /* Check for index.html file */
+        } else {
+          if (_CONFIG["DIRLIST"] == "ON") {
+            /* Show dirs and links when GET /folder/ */
+	  } else {
+	    rH = "";
+	    rH += "HTTP/1.1 403 Forbidden";
+	    rH += "\r\n\r\n";
+	    rH += page.error.fourZeroThree;
+	    rH += "\r\n\r\n";
+	  }
+        }
       } else if (dir.is_regular_file(reqFile)) {
         std::cout << reqPath << " is a file." << std::endl;
         rH = "";
@@ -164,6 +169,7 @@ int main(int argc, char **argv) {
       send(connection, rH.c_str(), rH.length(), 0);
     }
 
+    std::cout <<  "conf : " <<  _CONFIG["DIRLIST"] << std::endl;
     close(connection); 
   }
 

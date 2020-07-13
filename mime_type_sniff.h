@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 
+/*
 std::string ToHex(const std::string& s, bool upper_case){
   std::ostringstream ret;
   for (std::string::size_type i = 0; i < s.length(); ++i) {
@@ -13,6 +14,22 @@ std::string ToHex(const std::string& s, bool upper_case){
   }
   return ret.str();
 }
+*/
+
+std::string ToHex(const std::string& s, bool upper_case){
+  char *buffer;
+  int offset = 0;
+  unsigned char c;
+  buffer = (char *) calloc(s.length() * 2,1);
+  for (std::string::size_type i = 0; i < s.length(); i++) {
+    c = s[i]&0xff;
+	sprintf(buffer + offset,"%.2x",c);
+	//printf("Valor actual de buffer: %s\n",buffer);
+	offset+=2;
+  }
+  return buffer;
+}
+
 
 struct MIME {
 
@@ -77,7 +94,9 @@ struct MIME {
       file.close();
     
       std::string tohexed = ToHex(std::string(memblock, size), true);
+	  
       std::string fileMime;
+	  
 
       for (int i = 0; i < 32 && i < tohexed.size(); ++i) {
         fileMime += tohexed[i];

@@ -103,4 +103,34 @@ int isDirectory(const char *path) {
    return S_ISDIR(statbuf.st_mode);
 }
 
+char *file_get_contents(const char* path, int*  r_length){
+	FILE *fd = NULL;
+	char *buffer = NULL;
+	char temp[64];
+	int length = 0,leido = 0,offset = 0;
+	length = fsize(path);
+	buffer =  (char*) calloc(length,1);
+	if(buffer  != NULL)	{
+		fd= fopen(path,"rb+");
+		if(fd != NULL)	{
+			while(!feof(fd))	{
+				memset(temp,0,64);
+				leido = fread(temp,1,64,fd);
+				memcpy(buffer + offset,temp,leido);
+				offset+= leido;
+			}
+			fclose(fd);
+		}
+		else	{
+			perror("fopen()");
+		}
+	}
+	else	{
+		perror("calloc()");
+	}
+	if(r_length != NULL)	{
+		r_length[0] = length;
+	}
+	return buffer;
+}
 };

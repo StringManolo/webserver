@@ -32,7 +32,10 @@ DIRECTORIES dir;
 
 /* error pages defined here */
 #include "pages.h"
-PAGES page; 
+PAGES page;
+
+#include "mime_type_sniff.h"
+MIME mime;
 
 
 
@@ -45,6 +48,16 @@ PAGES page;
 #define REQUEST j == 0
 
 int main(int argc, char **argv) {
+
+  std::string hexfile = "serv.cpp";
+  std::cout << "Requested file = " << hexfile << 
+    std::endl << "File Headers Seems like a " << mime.sniff(hexfile) << " file type." <<  std::endl;
+
+  /*std::cout << mime.header.size() << std::endl << mime.type.size()  << std::endl;*/
+
+  /*for(int i = 0; i < mime.type.size(); ++i) {
+    std::cout << i << " . " << mime.type[i] << std::endl << mime.header[i] << std::endl << std::endl;
+  }*/
 
   struct in_addr ip;
 

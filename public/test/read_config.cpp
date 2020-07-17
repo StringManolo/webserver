@@ -1,35 +1,41 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+#include <cstring>
+#include <cstdlib>
+#include <iostream>
+#include <unistd.h>
+#include <map>
+#include "serv.h"
+
 
 #define CONFIG_VAR_LENGTH_CONST 12
 
-char *ltrim(char *str, const char *seps);
-char *rtrim(char *str, const char *seps);
-char *trim(char *str, const char *seps);
-int in_array(char **array, int size, char *lookfor );
-int index_of(char **array, int size, char *lookfor );
-
 int config_var_length = CONFIG_VAR_LENGTH_CONST;
 
-char *defaults_config[CONFIG_VAR_LENGTH_CONST] = {"localhost","80","./public_html","./access.log","30","1048576","","OFF","ON","443","./cert.pem","./key.pem"};
-char *variables_config[CONFIG_VAR_LENGTH_CONST] = {"IP","PORT","PATH","LOGFILE","TIMEOUT","MAXREQUESTSIZE","CACHEFILES","DIRLIST","SSL","SSLPORT","CERTFILE","CERTKEY"};
+char const *defaults_config[CONFIG_VAR_LENGTH_CONST] = {"localhost","80","./public_html","./access.log","30","1048576","","OFF","ON","443","./cert.pem","./key.pem"};
+char const *variables_config[CONFIG_VAR_LENGTH_CONST] = {"IP","PORT","PATH","LOGFILE","TIMEOUT","MAXREQUESTSIZE","CACHEFILES","DIRLIST","SSL","SSLPORT","CERTFILE","CERTKEY"};
 
 int found_config[CONFIG_VAR_LENGTH_CONST] ={0,0,0,0,0,0,0,0,0,0,0,0};
 
+std::map<std::string,std::string> _CONFIG;
+
 int read_config()	{
+	int  i = 0;
 	FILE *config = NULL;
 	config = fopen("serv.conf","r");
 	if(config == NULL)	{
+		while(i < CONFIG_VAR_LENGTH_CONST)	{
+			_CONFIG.insert(std::pair<std::string,std::string>(variables_config[i], defaults_config[i]));
+			i++;
+		}
+		
 		/*
 			We need to add default values to main config MAP variable.
 		*/
 		return 0;
 	}
 	else	{
-		int i = 0,line_length = 0,key_length = 0, value_length = 0,index_temp = 0;
+		int line_length = 0,key_length = 0, value_length = 0,index_temp = 0;
 		char *line = NULL,*aux,*key = NULL,*value = NULL;
-		line = malloc(1024);
+		line = (char*) malloc(1024);
 		while(fgets(line,1024,config) != NULL && !feof(config))	{
 			trim(line,NULL);
 			line_length = strlen(line);
@@ -41,8 +47,8 @@ int read_config()	{
 					printf("Line with value: %s\n",line);
 					printf("%i - %i\n",key_length,value_length);
 					if(key_length > 0 && value_length > 0)	{
-						key = calloc(key_length+1,1);
-						value = calloc(value_length+1,1);
+						key = (char*) calloc(key_length+1,1);
+						value = (char*) calloc(value_length+1,1);
 						memcpy(key,line,key_length);
 						memcpy(value,aux+1,value_length);
 						trim(key,NULL);
@@ -53,16 +59,19 @@ int read_config()	{
 							printf("Key found [%s] index %i : %s\n",key,index_temp,variables_config[index_temp]);
 							found_config[index_temp] = 1;
 							
+							_CONFIG.insert(std::pair<std::string,std::string>(key, value));
+							
 							/*
 								We need to add key and value  to a MAP global config
 								
 							*/
 						}
 						else	{
+							free(key);
+							free(value);
 							printf("Ignoring line with unexpected key: %s\n",line);	
 						}
-						free(key);
-						free(value);
+
 					}
 					else	{
 						printf("Ignoring line without value or key: %s\n",line);	
@@ -75,7 +84,6 @@ int read_config()	{
 			else	{
 				printf("Ignored comment line: %s\n",line);
 			}
-			i++;
 		}
 		free(line);
 		fclose(config);
@@ -83,7 +91,13 @@ int read_config()	{
 		/*
 		We need to add default values of not found keys to a Global config MAP
 		*/
+		while(i < CONFIG_VAR_LENGTH_CONST)	{
+			
+			i++;
+		}
 	}
+	
+	return 0;
 }
 
 char *ltrim(char *str, const char *seps)
@@ -133,7 +147,7 @@ int in_array(char **array, int size, char *lookfor )
     return 0;
 }
 
-int index_of(char **array, int size, char *lookfor )
+int index_of(char const **array, int size, char *lookfor )
 {
     int i;
     for (i = 0; i < size; i++)
@@ -142,9 +156,11 @@ int index_of(char **array, int size, char *lookfor )
     return -1;
 }
 
+/*
 
 int main()	{
 	read_config();
 	
 }
+*/
 

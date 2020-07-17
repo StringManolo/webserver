@@ -153,7 +153,8 @@ int main(int argc, char **argv) {
 			rH += "HTTP/1.1 200 OK";
 			rH += "\r\n\r\n";
 			char *buffer = dir.file_get_contents(reqFile,&leido);
-			rH += buffer;		
+			printf("%i\n",leido);
+			rH += std::string(buffer,leido);
 			rH += "\r\n\r\n";
 		  }
 		  else	{		//reqFile is outside of _CONFIG["PATH"], maybe ../../../ or something like that

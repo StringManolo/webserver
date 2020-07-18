@@ -11,6 +11,7 @@
 #include <vector>
 #include <string>
 
+
 struct DIRECTORIES {
   std::string pwd = realpath("./", NULL);
   /*std::string pwd2 = getenv("PWD"); */

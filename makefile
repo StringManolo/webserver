@@ -9,4 +9,6 @@ serv: serv.cpp
 
 clean:
 	rm serv
-	
+	rm logs.txt
+	touch logs.txt
+

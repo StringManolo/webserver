@@ -1,6 +1,6 @@
 CC = gcc
 CCPP = g++
-CFLAGS =
+CFLAGS = -lpthread
 
 default: serv
 

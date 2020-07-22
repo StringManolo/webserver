@@ -86,7 +86,6 @@ int read_config()	{
 		while(i < CONFIG_VAR_LENGTH_CONST)	{
 			if(found_config[i] == 0)	{
 				_CONFIG.insert(std::pair<std::string,std::string>(variables_config[i], defaults_config[i]));
-			i++;
 			}
 			i++;
 		}
